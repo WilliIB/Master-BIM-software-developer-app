@@ -55,7 +55,7 @@
             </div>
             <div style="display: flex; margin: 10px 0px 10px auto; column-gap: 10px;">
               <button style="background-color: transparent;">Cancel</button>
-              <button style="background-color: rgb(18, 145, 18);">Accept</button>
+              <button>Accept</button>
             </div>
           </div>
         </form>
@@ -96,11 +96,11 @@
         </div>
       </div>
     </div>
-    <div class="page" id="project-details">
+    <div class="page" id="project-details" style="display: none;">
       <header>
         <div>
           <h2>Hospital Center</h2>
-          <p style="color: #969696">Community hospital located at downtown</p>
+          <p style="color: var(--text-color-secondary)">Community hospital located at downtown</p>
         </div>
       </header>
       <div class="main-page-content">
@@ -117,19 +117,19 @@
               </div>
               <div style="display: flex; column-gap: 30px; padding: 30px 0px; justify-content: space-between;">
                 <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Status</p>
+                  <p style="color: var(--text-color-secondary); font-size: var(--font-sm)">Status</p>
                   <p>Active</p>
                 </div>
                 <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Cost</p>
+                  <p style="color: var(--text-color-secondary); font-size: var(--font-sm)">Cost</p>
                   <p>$ 2'542.000</p>
                 </div>
                 <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Role</p>
+                  <p style="color: var(--text-color-secondary); font-size: var(--font-sm)">Role</p>
                   <p>Engineer</p>
                 </div>
                 <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Finish Date</p>
+                  <p style="color: var(--text-color-secondary); font-size: var(--font-sm)">Finish Date</p>
                   <p>2023-05-01</p>
                 </div>
               </div>
@@ -165,6 +165,101 @@
         <div id="viewer-container" class="dashboard-card"></div>
       </div>
     </div>
+    <div class="page" id="users-page" style="display: flex;">
+        <dialog id="new-user-modal">
+          <form>
+            <h2>New User</h2>
+            <div class="input-list">
+              <div class="form-field-container">
+                <label><span class="material-icons-round">badge</span>Name</label>
+                <input type="text" placeholder="What's your name?">
+              </div>
+              <div class="form-field-container">
+                <label><span class="material-icons-round">business</span>Company</label>
+                <input type="text" placeholder="What company do you work for?">
+              </div>
+              <div class="form-field-container">
+                <label><span class="material-icons-round">person</span>Role</label>
+                <select>
+                  <option>Architect</option>
+                  <option>Engineer</option>
+                  <option>Developer</option>
+                </select>
+              </div>
+              <div class="form-field-container">
+                <label><span class="material-icons-round">mail</span>Email</label>
+                <input type="email" placeholder="What's your email adress?">
+              </div>
+              <div style="display: flex; margin: 10px 0px 10px auto; column-gap: 10px;">
+                <button style="background-color: transparent;">Cancel</button>
+                <button>Accept</button>
+              </div>
+            </div>
+          </form>
+        </dialog>
+        <header>
+          <h2>People</h2>
+          <div>
+            <button><span class="material-icons-round">add</span>New User</button>
+          </div>
+        </header>
+        <div id="users-list">
+          <div style="display: flex; align-items: center; column-gap: 10px; justify-content: flex-end;margin-bottom: 20px;">
+            <span class="material-icons-round">search</span>
+            <input type="text" placeholder="Search User" style="width: 25%;">
+          </div>
+          <table>
+            <thead>
+                <tr style="vertical-align: bottom;">
+                    <th></th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Tasks</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><p class="user-icon">EJ</p></td>
+                    <td>Emily Johnson</td>
+                    <td>ArchiDesign Studios</td>
+                    <td>Architect</td>
+                    <td>6</td>
+                    <td>emily.johnson@archidesign.com</td>
+                </tr>
+                <tr>
+                    <td><p class="user-icon">BM</p></td>
+                    <td>Brian Martinez</td>
+                    <td>Structural Solutions Inc.</td>
+                    <td>Structural Engineer</td>
+                    <td>4</td>
+                    <td>brian.martinez@structuralsolutions.com</td>
+                </tr>
+                <tr>
+                    <td><p class="user-icon">DM</p></td>
+                    <td>David Miller</td>
+                    <td>BuildMaster Construction</td>
+                    <td>General Contractor</td>
+                    <td>16</td>
+                    <td>david.miller@buildmasterconstruction.com</td>
+                </tr>
+                <tr>
+                    <td><p class="user-icon">LC</p></td>
+                    <td>Lisa Chang</td>
+                    <td>BIM Solutions Co.</td>
+                    <td>BIM Coordinator</td>
+                    <td>10</td>
+                    <td>lisa.chang@bimsolutionsco.com</td>
+                </tr>
+                
+            </tbody>
+            
+        </table>
+        </div>      
+        </div>
+      </div>
   </main>
+<script src="./show-modal.js"></script>
 </body>
 </html>
