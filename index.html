@@ -16,23 +16,23 @@
     </ul>
   </aside>
   <main id="content">
-    <div class="page" id="projects-page" style="display: none;">
+    <div class="page" id="projects-page" style="display: flex;">
       <dialog id="new-project-modal">
-        <form>
+        <form id="new-project-form">
           <h2>New Project</h2>
           <div class="input-list">
             <div class="form-field-container">
               <label><span class="material-icons-round">apartment</span>Name</label>
-              <input type="text" placeholder="What's the name of your project?">
+              <input name="name" type="text" placeholder="What's the name of your project?">
               <p style="color: gray; font-size: var(--font-sm); margin-top: 5px; font-style: italic;">TIP: Give it a short name</p>
             </div>
             <div class="form-field-container">
               <label><span class="material-icons-round">subject</span>Description</label>
-              <textarea cols="30" rows="5" placeholder="Give your project a nice description! So people is jealous about it."></textarea>
+              <textarea name="description" cols="30" rows="5" placeholder="Give your project a nice description! So people is jealous about it."></textarea>
             </div>
             <div class="form-field-container">
               <label><span class="material-icons-round">person</span>Role</label>
-              <select>
+              <select name="userRole">
                 <option>Architect</option>
                 <option>Engineer</option>
                 <option>Developer</option>
@@ -40,7 +40,7 @@
             </div>
             <div class="form-field-container">
               <label><span class="material-icons-round">not_listed_location</span>Status</label>
-              <select>
+              <select name="status">
                 <option>Pending</option>
                 <option>Active</option>
                 <option>Finished</option>
@@ -51,7 +51,7 @@
                 <span class="material-icons-round">calendar_month</span>
                 Finish Date
               </label>
-              <input type="date" name="finishDate"></input>
+              <input name="finishDate" type="date"></input>
             </div>
             <div style="display: flex; margin: 10px 0px 10px auto; column-gap: 10px;">
               <button style="background-color: transparent;">Cancel</button>
@@ -63,7 +63,7 @@
       <header>
         <h2>Projects</h2>
         <div>
-          <button><span class="material-icons-round">add</span>New Project</button>
+          <button id="new-project-btn"><span class="material-icons-round">add</span>New Project</button>
         </div>
       </header>
       <div id="projects-list">
@@ -165,7 +165,7 @@
         <div id="viewer-container" class="dashboard-card"></div>
       </div>
     </div>
-    <div class="page" id="users-page" style="display: flex;">
+    <div class="page" id="users-page" style="display: none;">
         <dialog id="new-user-modal">
           <form>
             <h2>New User</h2>
@@ -260,6 +260,6 @@
         </div>
       </div>
   </main>
-<script src="./show-modal.js"></script>
+<script src="./index.js"></script>
 </body>
 </html>
