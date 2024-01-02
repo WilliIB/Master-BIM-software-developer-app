@@ -1,34 +1,40 @@
 import { IProject, ProjectStatus, UserRole } from "./classes/Project";
 import { ProjectsManager } from "./classes/ProjectsManager";
 
-function showModal(id: string) {
-   const modal = document.getElementById(id);
-   if (modal && modal instanceof HTMLDialogElement) {
-      modal.showModal();
-   } else {
-      console.warn("Id for the modal not found in the page:", id);
-   }
-}
-function closeModal(id: string) {
-   const modal = document.getElementById(id);
-   if (modal && modal instanceof HTMLDialogElement) {
-      modal.close();
-   } else {
-      console.warn("Id for the modal not found in the page:", id);
-   }
-}
-
 const projectsListUI = document.getElementById("projects-list") as HTMLElement;
 const projectsManager = new ProjectsManager(projectsListUI);
 
-const newProjectBtn = document.getElementById("new-project-btn");
-if (newProjectBtn) {
-   newProjectBtn.addEventListener("click", () => {
-      showModal("new-project-modal");
-   });
-} else {
-   console.warn("New projects button was not found");
+function toggleModalVisibility(id: string) {
+   const modal = document.getElementById(id);
+   if (modal && modal instanceof HTMLDialogElement) {
+      modal.open ? modal.close() : modal.showModal();
+   } else {
+      console.warn("Id for the modal not found in the page:", id);
+   }
 }
+
+function modalButtonSet(buttonId: string, modalId: string, formId?: string) {
+   const btn = document.getElementById(buttonId);
+
+   if (btn) {
+      btn.addEventListener("click", () => {
+         toggleModalVisibility(modalId);
+         if (formId) {
+            const form = document.getElementById(formId);
+            form instanceof HTMLFormElement
+               ? form.reset()
+               : console.warn("No valid form:", formId);
+         }
+      });
+   } else {
+      console.warn("Button was not found Id:", buttonId);
+   }
+}
+
+modalButtonSet("new-project-btn", "new-project-modal");
+modalButtonSet("cancel-project-btn", "new-project-modal", "new-project-form");
+
+projectsManager.newDefaultProject()
 
 const projectForm = document.getElementById("new-project-form");
 if (projectForm && projectForm instanceof HTMLFormElement) {
@@ -44,7 +50,7 @@ if (projectForm && projectForm instanceof HTMLFormElement) {
       };
       const project = projectsManager.newProject(projectData);
       projectForm.reset();
-      closeModal("new-project-modal")
+      toggleModalVisibility("new-project-modal");
    });
 } else {
    console.warn("Project form not found");
