@@ -9,6 +9,13 @@ export class ProjectsManager {
    }
 
    newProject(data: IProject) {
+      const projectNames = this.list.map((project) => project.name);
+      const nameInUse = projectNames.includes(data.name);
+      if (nameInUse) {
+         throw new Error(
+            `A project with the name "${data.name}" already exist`
+         );
+      }
       const project = new Project(data);
       this.ui.append(project.ui);
       this.list.push(project);
@@ -59,6 +66,5 @@ export class ProjectsManager {
       const project = new Project(data);
       this.ui.append(project.ui);
       this.list.push(project);
-      console.log(project);
    }
 }

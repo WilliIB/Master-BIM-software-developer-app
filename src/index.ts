@@ -21,9 +21,7 @@ function modalButtonSet(buttonId: string, modalId: string, formId?: string) {
          toggleModalVisibility(modalId);
          if (formId) {
             const form = document.getElementById(formId);
-            form instanceof HTMLFormElement
-               ? form.reset()
-               : console.warn("No valid form:", formId);
+            form instanceof HTMLFormElement ? form.reset() : console.warn("No valid form:", formId);
          }
       });
    } else {
@@ -34,7 +32,7 @@ function modalButtonSet(buttonId: string, modalId: string, formId?: string) {
 modalButtonSet("new-project-btn", "new-project-modal");
 modalButtonSet("cancel-project-btn", "new-project-modal", "new-project-form");
 
-projectsManager.newDefaultProject()
+projectsManager.newDefaultProject();
 
 const projectForm = document.getElementById("new-project-form");
 if (projectForm && projectForm instanceof HTMLFormElement) {
@@ -48,9 +46,15 @@ if (projectForm && projectForm instanceof HTMLFormElement) {
          status: formData.get("status") as ProjectStatus,
          finishDate: new Date(formData.get("finishDate") as string),
       };
-      const project = projectsManager.newProject(projectData);
-      projectForm.reset();
-      toggleModalVisibility("new-project-modal");
+      try {
+         const project = projectsManager.newProject(projectData);
+         projectForm.reset();
+         toggleModalVisibility("new-project-modal");
+      } catch (error) {
+         const errorMessage = document.getElementById("error-message") as HTMLElement;
+         errorMessage.textContent = error.message;
+         toggleModalVisibility("error-modal");
+      }
    });
 } else {
    console.warn("Project form not found");

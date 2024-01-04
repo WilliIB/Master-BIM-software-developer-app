@@ -9,6 +9,7 @@
    --background: #202124;
    --background-100: #26282b;
    --background-200: #3b3c3f;
+   --red: #c40000;
    --font-xs: 10px;
    --font-sm: 12px;
    --font-base: 14px;
@@ -164,7 +165,7 @@ header {
    border-radius: 10px;
    width: 35px;
    height: 35px;
-   font-weight:bold;
+   font-weight: bold;
 }
 
 #projects-list {
@@ -180,13 +181,11 @@ header {
    margin: 20px 40px;
    padding: 20px;
    height: 100%;
-
 }
 
 #users-list table {
    border-collapse: collapse;
    width: 100%;
-   
 }
 
 #users-list th,
@@ -195,7 +194,6 @@ header {
    font-size: var(--font-base);
    font-weight: normal;
    padding: 2px 10px;
-   
 }
 
 #users-list th {
@@ -205,20 +203,18 @@ header {
 }
 
 #users-list th:hover {
-color: var(--text-color);
+   color: var(--text-color);
 }
 
 #users-list tbody tr {
    cursor: pointer;
    height: 80px;
-
 }
 
 #users-list tbody tr:hover {
    transform: translateX(15px);
    color: var(--primary-300);
    /* box-shadow:  inset 2px 0px var(--primary); */
-
 }
 
 /* Form Styles */
@@ -285,8 +281,16 @@ select:focus {
    outline: 2px solid var(--primary);
 }
 
-input:invalid{
-   outline: 2px solid red;
+input:invalid {
+   outline: 2px solid var(--red);
+}
+
+#error-modal {
+   padding: 2rem;
+   border: 2px solid var(--red);
+   border-radius: 10px;
+   background-color: var(--background-100);
+   color: var(--text-color);
 }
 
 /* Project details page */
