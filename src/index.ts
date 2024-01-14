@@ -59,3 +59,17 @@ if (projectForm && projectForm instanceof HTMLFormElement) {
 } else {
    console.warn("Project form not found");
 }
+
+const exportProjectsBtn= document.getElementById("export-projects-btn")
+if (exportProjectsBtn) {
+  exportProjectsBtn.addEventListener("click", () => {
+    projectsManager.exportToJSON()
+  })
+}
+
+const importProjectsBtn = document.getElementById("import-projects-btn")
+if (importProjectsBtn) {
+  importProjectsBtn.addEventListener("click", () => {
+    projectsManager.importFromJSON()
+  })
+}
