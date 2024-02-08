@@ -15,6 +15,15 @@ export class ProjectsManager {
       throw new Error(`A project with the name "${data.name}" already exist`);
     }
     const project = new Project(data);
+    project.ui.addEventListener("click", () => {
+      const projectsPage = document.getElementById("projects-page");
+      const detailsPage = document.getElementById("project-details");
+      if (!projectsPage || !detailsPage) {
+        return;
+      }
+      projectsPage.style.display = "none"
+      detailsPage.style.display = "flex"
+    });
     this.ui.append(project.ui);
     this.list.push(project);
     return project;
@@ -97,8 +106,7 @@ export class ProjectsManager {
       userRole: "architect",
       finishDate: new Date(),
     };
-    const project = new Project(data);
-    this.ui.append(project.ui);
-    this.list.push(project);
+    this.newProject(data)
+
   }
 }
