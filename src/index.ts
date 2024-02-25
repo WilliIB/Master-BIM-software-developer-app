@@ -1,60 +1,20 @@
 import { IProject, ProjectStatus, UserRole } from "./classes/Project";
 import { ProjectsManager } from "./classes/ProjectsManager";
+import { UIManager} from "./classes/UiManager";
 
+const uiManager = new UIManager()
+const projectsButton = document.getElementById("projects-button")
 const projectsPage = document.getElementById("projects-page");
-const detailsPage = document.getElementById("project-details");
+uiManager.setPageButton(projectsButton,projectsPage)
+const userButton = document.getElementById("users-button")
 const usersPage = document.getElementById("users-page");
-const pages = [projectsPage, detailsPage, usersPage];
-
-function showPage(page: HTMLElement) {
-  page.style.display = "flex";
-  const pagesToHidde = pages.filter((pageInArray) => pageInArray !== page);
-  pagesToHidde.forEach((element) => {
-    element ? (element.style.display = "none") : console.warn("No page to hidde found");
-  });
-}
-function setAsideButtons() {
-  const projectsButton = document.getElementById("projects-button");
-  if (!projectsButton) {
-    console.log("No projects button found");
-    return;
-  }
-  projectsButton.addEventListener("click", () => {
-    projectsPage ? showPage(projectsPage) : console.warn("No projects page found");
-  });
-}
-setAsideButtons();
+uiManager.setPageButton(userButton,usersPage)
 
 const projectsListUI = document.getElementById("projects-list") as HTMLElement;
 const projectsManager = new ProjectsManager(projectsListUI);
 
-function toggleModalVisibility(id: string) {
-  const modal = document.getElementById(id);
-  if (modal && modal instanceof HTMLDialogElement) {
-    modal.open ? modal.close() : modal.showModal();
-  } else {
-    console.warn("Id for the modal not found in the page:", id);
-  }
-}
-
-function modalButtonSet(buttonId: string, modalId: string, formId?: string) {
-  const btn = document.getElementById(buttonId);
-
-  if (btn) {
-    btn.addEventListener("click", () => {
-      toggleModalVisibility(modalId);
-      if (formId) {
-        const form = document.getElementById(formId);
-        form instanceof HTMLFormElement ? form.reset() : console.warn("No valid form:", formId);
-      }
-    });
-  } else {
-    console.warn("Button was not found Id:", buttonId);
-  }
-}
-
-modalButtonSet("new-project-btn", "new-project-modal");
-modalButtonSet("cancel-project-btn", "new-project-modal", "new-project-form");
+uiManager.setModalButton("new-project-btn", "new-project-modal")
+uiManager.setModalButton("cancel-project-btn", "new-project-modal", "new-project-form")
 
 projectsManager.newDefaultProject();
 
@@ -73,11 +33,11 @@ if (projectForm && projectForm instanceof HTMLFormElement) {
     try {
       const project = projectsManager.newProject(projectData);
       projectForm.reset();
-      toggleModalVisibility("new-project-modal");
+      uiManager.toggleModalVisibility("new-project-modal");
     } catch (error) {
       const errorMessage = document.getElementById("error-message") as HTMLElement;
       errorMessage.textContent = error.message;
-      toggleModalVisibility("error-modal");
+      uiManager.toggleModalVisibility("error-modal");
     }
   });
 } else {
