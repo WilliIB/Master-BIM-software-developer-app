@@ -21,12 +21,36 @@ export class ProjectsManager {
       if (!projectsPage || !detailsPage) {
         return;
       }
-      projectsPage.style.display = "none"
-      detailsPage.style.display = "flex"
+      projectsPage.style.display = "none";
+      detailsPage.style.display = "flex";
+      this.setDetailPage(project);
     });
     this.ui.append(project.ui);
     this.list.push(project);
     return project;
+  }
+
+  private setDetailPage(project: Project) {
+    const detailsPage = document.getElementById("project-details");
+    if (!detailsPage) {
+      return;
+    }
+    for (const key in project) {
+      const HTMLElements = detailsPage.querySelectorAll(`[data-project-info=${key}]`);
+      if (HTMLElements) {
+        if (key === "finishDate") {
+          HTMLElements[0].textContent = project.finishDate.toDateString();
+        } else if (key === "progress") {
+          const progress = HTMLElements[0] as HTMLElement;
+          progress.style.width = project.progress + "%";
+          progress.textContent = project.progress.toString();
+        } else {
+          for (const element of HTMLElements) {
+            element.textContent = project[key];
+          }
+        }
+      }
+    }
   }
 
   getProject(id: string) {
@@ -106,7 +130,6 @@ export class ProjectsManager {
       userRole: "architect",
       finishDate: new Date(),
     };
-    this.newProject(data)
-
+    this.newProject(data);
   }
 }

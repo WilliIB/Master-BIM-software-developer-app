@@ -11,7 +11,7 @@ export class UIManager {
   showPage(page: HTMLElement) {
     page.style.display = "flex";
     const pagesToHidde = this.pages.filter((pageInArray) => pageInArray !== page);
-    pagesToHidde.forEach((element: HTMLElement) => {
+    pagesToHidde.forEach((element) => {
       element ? (element.style.display = "none") : console.warn("No page to hidde found");
     });
   }
