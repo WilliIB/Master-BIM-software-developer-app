@@ -36,19 +36,18 @@ export class ProjectsManager {
       return;
     }
     for (const key in project) {
-      const HTMLElements = detailsPage.querySelectorAll(`[data-project-info=${key}]`);
-      if (HTMLElements) {
-        if (key === "finishDate") {
-          HTMLElements[0].textContent = project.finishDate.toDateString();
-        } else if (key === "progress") {
-          const progress = HTMLElements[0] as HTMLElement;
-          progress.style.width = project.progress + "%";
-          progress.textContent = project.progress.toString();
-        } else {
-          for (const element of HTMLElements) {
-            element.textContent = project[key];
-          }
-        }
+      const element = detailsPage.querySelector(`[data-project-info=${key}]`);
+      if (!element) {
+        continue;
+      }
+      if (key === "finishDate") {
+        element.textContent = project.finishDate.toDateString();
+      } else if (key === "progress") {
+        const progress = element as HTMLElement;
+        progress.style.width = project.progress + "%";
+        progress.textContent = project.progress.toString();
+      } else {
+        element.textContent = project[key];
       }
     }
   }
