@@ -4,7 +4,7 @@ export class UIManager {
   constructor() {
     const pages = document.getElementsByClassName("page");
     for (const page of pages) {
-      page && page instanceof HTMLElement ? this.pages.push(page) : console.warn("Page not found:", page);
+      page instanceof HTMLElement ? this.pages.push(page) : console.warn("Page not found:", page);
     }
   }
 
@@ -12,11 +12,11 @@ export class UIManager {
     page.style.display = "flex";
     const pagesToHidde = this.pages.filter((pageInArray) => pageInArray !== page);
     pagesToHidde.forEach((element) => {
-      element ? (element.style.display = "none") : console.warn("No page to hidde found");
+      element.style.display = "none";
     });
   }
 
-  setPageButton(button, page) {
+  setPageButton(button: HTMLElement, page: HTMLElement) {
     if (!(page instanceof HTMLElement)) {
       console.warn("Page not found");
       return;
@@ -38,10 +38,10 @@ export class UIManager {
       console.warn("Id for the modal not found in the page:", id);
     }
   }
-  
+
   setModalButton(buttonId: string, modalId: string, formId?: string) {
     const btn = document.getElementById(buttonId);
-  
+
     if (btn) {
       btn.addEventListener("click", () => {
         this.toggleModalVisibility(modalId);
